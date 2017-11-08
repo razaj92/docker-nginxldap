@@ -2,7 +2,7 @@ FROM alpine:3.6
 
 ENV NGINX_VERSION release-1.11.13
 
-RUN apk add --no-cache git openldap-dev ca-certificates gcc g++ make pcre-dev linux-headers zlib-dev openssl
+RUN apk add --no-cache git openldap-dev ca-certificates gcc g++ make pcre-dev linux-headers zlib-dev openssl gettext
 
 RUN mkdir /var/log/nginx \
 	&& mkdir /etc/nginx \
@@ -40,5 +40,8 @@ RUN mkdir /var/log/nginx \
 EXPOSE 80 443
 
 COPY bin/run.sh /run.sh
+COPY bin/nginx.conf /nginx.conf
+
 RUN chmod +x /run.sh
+RUN touch /_external-auth-Lw
 CMD ["/run.sh"]
